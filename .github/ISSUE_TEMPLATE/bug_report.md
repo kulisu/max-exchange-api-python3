@@ -7,23 +7,25 @@ assignees: ''
 
 ---
 
-**Describe the bug**
+**Description**
 A clear and concise description of what the bug is.
 
-**To Reproduce**
+**Reproduction**
 1. Run '...'
 2. See error
 
 **Expected behavior**
 A clear and concise description of what you expected to happen.
 
-**Running environment:**
- - Operating system: [e.g. Microsoft Windows 10]
- - Python version [e.g. 3.5.2]
+**Running details**
+ - Relevant console output 
+```[if any]```
+ - Exception traceback
+```[if any]```
 
-** Running details:**
- - Relevant console output [if any]
- - Exception traceback [if any]
+**Running environment**
+ - Operating system: [e.g. Microsoft Windows 10]
+ - Python version: [e.g. 3.6.7]
 
 **Screenshots**
 If applicable, add screenshots to help explain your problem.
