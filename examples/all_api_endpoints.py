@@ -22,9 +22,6 @@ if __name__ == '__main__':
         result = client.get_public_withdrawal_constraints()
         print(f"[I] Invoked get_public_withdrawal_constraints() API Result: \n    {result}\n")
 
-        result = client.get_private_account_balances()
-        print(f"[I] Invoked get_private_account_balances() API Result: \n    {result}\n")
-
         # result = client.get_public_all_markets()
         # print(f"[I] Invoked get_public_all_markets() API Result: \n    {result}\n")
 
@@ -59,6 +56,9 @@ if __name__ == '__main__':
         # print(f"[I] Invoked get_public_recent_trades('maxtwd', 1560509180) API Result: \n    {result}\n")
 
         ''' Private (Read) '''
+        result = client.get_private_account_balances()
+        print(f"[I] Invoked get_private_account_balances() API Result: \n    {result}\n")
+
         result = client.get_private_deposit_history()
         print(f"[I] Invoked get_private_deposit_history() API Result: \n    {result}\n")
 
@@ -154,9 +154,9 @@ if __name__ == '__main__':
         # result = client.set_private_deposit_address('xrp')
         # print(f"[I] Invoked set_private_deposit_address('xrp') API Result: \n    {result}\n")
     except Exception as error:
-        print(f"[X] {str(error)}")
+        print(f"[X] Exception: {str(error)}")
 
         # Networking errors occurred here
         response = getattr(error, 'read', None)
         if callable(response):
-            print(f"[X] {response().decode('utf-8')}")
+            print(f"[X] Reason: {response().decode('utf-8')}")
