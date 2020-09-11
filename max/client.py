@@ -170,12 +170,19 @@ class Client(object):
         :return: a list contains all OHLC prices in exchange
         """
 
-        query = {
-            'market': pair.lower(),
-            'limit': limit,
-            'period': period,
-            'timestamp': timestamp
-        }
+        if timestamp != None:
+            query = {
+                'market': pair.lower(),
+                'limit': limit,
+                'period': period,
+                'timestamp': timestamp
+            }
+        else:
+            query = {
+                'market': pair.lower(),
+                'limit': limit,
+                'period': period,
+            }
 
         return self._send_request('public', 'GET', 'k', query)
 
