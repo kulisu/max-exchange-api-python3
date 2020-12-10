@@ -12,22 +12,14 @@ USE THIS WRAPPER AT YOUR OWN RISK, I WILL NOT CORRESPOND TO ANY LOSES
 - Simple handling of [authentication](https://max.maicoin.com/documents/api_v2#sign) with API key and secret
 - All HTTP raw requests and responses can be found [here](https://gist.github.com/kulisu/8e519e2746a394401272a5f1f779c257)
 
-## Donate
-
-If you feel this wrapper saved your lifes, buy me a coffee ?
-
-- BTC: 3GEvzXZpAEoW8ZT5PYsj6rfnq1wGQnAkQY
-- ETH: 0x7b91ac177aba5fc8f73b915d62c895296f6e93c4
-- LTC: LW13jRjsyfUXHxyNLQGd1UTAsgerY9iHuc
-- MAX: 0x7b91ac177aba5fc8f73b915d62c895296f6e93c4
-- USDT: 177YJBfn412AuaFmJc5m24Km5pF7Ufvm53
-
-## Example
+## Usage
 
 1. [Register an account](https://max.maicoin.com/signup?r=ecc3b0ab) with MAX exchange _(referral link)_
 2. [Generate API key and secret](https://max.maicoin.com/api_tokens), assign relevant permissions to it
 3. Clone this repository, and run `examples/all_api_endpoints.py`
 4. Write your own trading policies and get profits ! 
+
+### Linux
 
 ```bash
 cd ~/ && git clone https://github.com/kulisu/max-exchange-api-python3
@@ -38,6 +30,22 @@ cd ~/max-exchange-api-python3 && cp examples/all_api_endpoints.py .
 
 python3 all_api_endpoints.py
 ```
+
+### Windows
+
+```batch
+cd %USERPROFILE%\Downloads
+git clone https://github.com/kulisu/max-exchange-api-python3
+
+cd max-exchange-api-python3 && copy examples\all_api_endpoints.py .
+
+# update API key and secret
+# notepad all_api_endpoints.py
+
+python3 all_api_endpoints.py
+```
+
+### Example
 
 ```python
 #!/usr/bin/env python3
@@ -99,3 +107,13 @@ if __name__ == '__main__':
         if callable(response):
             print(f"[X] {response().decode('utf-8')}")
 ```
+
+## Donation
+
+If you feel this wrapper saved your times, buy me a coffee ?
+
+- BTC: 32awSDjEY8V3KYS3bazLjSsu6SB3JiQcDi
+- ETH: 0xAC2a7571EBA8986e4Ec9bA1A81Cde323c959c614
+- LTC: MJNSuSSPYQRTknAMJw2BggocaMt9Lb7xFv
+- MAX: 0xAC2a7571EBA8986e4Ec9bA1A81Cde323c959c614
+- USDT: 34yVszuBhejsbSfnULK187srAhGkoeWgL6
