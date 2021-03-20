@@ -179,6 +179,15 @@ class Client(object):
 
         return self._send_request('public', 'GET', 'k', query)
 
+    def get_public_markets_summary(self):
+        """
+        https://max.maicoin.com/documents/api_list#!/public/getApiV2Summary
+
+        :return: a dict contains overview of market data for all tickers
+        """
+
+        return self._send_request('public', 'GET', 'summary')
+
     # TODO: this is a deprecated endpoint
     def get_public_order_book(self, pair, asks=20, bids=20):
         """
@@ -263,6 +272,19 @@ class Client(object):
         """
 
         return self._send_request('public', 'GET', 'withdrawal/constraint')
+
+    def get_public_vip_levels(self, level=None):
+        """
+        https://max.maicoin.com/documents/api_list#!/public/getApiV2VipLevels
+
+        :param level: the specific VIP level to query (optional)
+        :return: a list contains all VIP level fees
+        """
+
+        if level is not None and type(level) is int:
+            return self._send_request('public', 'GET', f"vip_levels/{level}")
+        else:
+            return self._send_request('public', 'GET', 'vip_levels')
 
     # Private API (Read)
     def get_private_account_balance(self, currency):
@@ -394,17 +416,31 @@ class Client(object):
 
         return self._send_request('private', 'GET', 'members/profile')
 
-    def get_private_order_detail(self, _id):
+    def get_private_vip_level(self):
+        """
+        https://max.maicoin.com/documents/api_list#!/private/getApiV2MembersVipLevel
+
+        :return: a dict contains VIP level info
+        """
+
+        return self._send_request('private', 'GET', 'members/vip_level')
+
+    def get_private_order_detail(self, _id, client_id=''):
         """
         https://max.maicoin.com/documents/api_list#!/private/getApiV2Order
 
         :param _id: the id of the order
+        :param client_id: a unique order id specified by user, must less or equal to 36
         :return: a dict contains all order information
         """
 
-        return self._send_request('private', 'GET', 'order', {'id': _id})
+        if client_id is not None and len(client_id) > 0:
+            return self._send_request('private', 'GET', 'order', {'client_oid': client_id})
+        else:
+            return self._send_request('private', 'GET', 'order', {'id': _id})
 
-    def get_private_order_history(self, pair, state=None, sort='asc', pagination=True, page=1, limit=100, offset=0):
+    def get_private_order_history(self, pair, state=None, sort='asc', pagination=True,
+                                  page=1, limit=100, offset=0, group_id=''):
         """
         https://max.maicoin.com/documents/api_list#!/private/getApiV2Orders
 
@@ -415,6 +451,7 @@ class Client(object):
         :param page: the page number applied for pagination
         :param limit: the orders limit to query
         :param offset: the records to skip, not applied for pagination
+        :param group_id: a integer group id for orders
         :return: a list contains all placed orders
         """
 
@@ -433,6 +470,9 @@ class Client(object):
 
         if state is not None and len(state) > 0:
             query['state'] = state
+
+        if group_id is not None and type(group_id) is int:
+            query['group_id'] = group_id
 
         return self._send_request('private', 'GET', 'orders', query)
 
@@ -608,22 +648,27 @@ class Client(object):
         return self._send_request('private', 'GET', 'withdrawals', query)
 
     # Private API (Write)
-    def set_private_cancel_order(self, _id):
+    def set_private_cancel_order(self, _id, client_id=''):
         """
         https://max.maicoin.com/documents/api_list#!/private/postApiV2OrderDelete
 
         :param _id: the id of the order
+        :param client_id: a unique order id specified by user, must less or equal to 36
         :return: a dict contains cancelled order information
         """
 
-        return self._send_request('private', 'POST', 'order/delete', {}, {'id': _id})
+        if client_id is not None and len(client_id) > 0:
+            return self._send_request('private', 'POST', 'order/delete', {'client_oid': client_id})
+        else:
+            return self._send_request('private', 'POST', 'order/delete', {}, {'id': _id})
 
-    def set_private_cancel_orders(self, pair='', side=''):
+    def set_private_cancel_orders(self, pair='', side='', group_id=''):
         """
         https://max.maicoin.com/documents/api_list#!/private/postApiV2OrdersClear
 
         :param pair: the trading pair to clear all orders
         :param side: the trading side to clear all orders
+        :param group_id: a integer group id for orders
         :return: a list contains all cleared orders
         """
 
@@ -631,12 +676,16 @@ class Client(object):
 
         if pair is not None and len(pair) > 0:
             form['market'] = pair.lower()
+
         if side is not None and len(side) > 0:
             form['side'] = side.lower()
 
+        if group_id is not None and type(group_id) is int:
+            form['group_id'] = group_id
+
         return self._send_request('private', 'POST', 'orders/clear', {}, form)
 
-    def set_private_create_order(self, pair, side, amount, price, stop='', _type='limit'):
+    def set_private_create_order(self, pair, side, amount, price, stop='', _type='limit', client_id='', group_id=''):
         """
         https://max.maicoin.com/documents/api_list#!/private/postApiV2Orders
 
@@ -646,6 +695,8 @@ class Client(object):
         :param price: the price of the order for the trading pair
         :param stop; the price to trigger a stop order
         :param _type: the order type, should only be limit, market, stop_limit or stop_market
+        :param client_id: a unique order id specified by user, must less or equal to 36
+        :param group_id: a integer group id for orders
         :return: a dict contains created order information
         """
 
@@ -659,6 +710,12 @@ class Client(object):
 
         if stop is not None and len(stop) > 0:
             form['stop_price'] = str(stop)
+
+        if client_id is not None and len(client_id) > 0:
+            form['client_oid'] = client_id
+
+        if group_id is not None and type(group_id) is int:
+            form['group_id'] = group_id
 
         return self._send_request('private', 'POST', 'orders', {}, form)
 
@@ -674,6 +731,8 @@ class Client(object):
         :param _types: the order type, should only be limit, market, stop_limit or stop_market
         :return: a list contains created orders information
         """
+
+        raise DeprecationWarning('this route will be removed since 2021/4/30')
 
         if _types is None:
             _types = []
