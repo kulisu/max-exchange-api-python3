@@ -42,7 +42,7 @@ class Client(object):
 
         headers = {
             'Accept': 'application/json',
-            'User-Agent': 'pyCryptoTrader/1.0.2',
+            'User-Agent': 'pyCryptoTrader/1.0.3',
         }
 
         if scope.lower() == 'private':
