@@ -199,6 +199,8 @@ class Client(object):
         :return: a dict contains asks and bids data
         """
 
+        raise DeprecationWarning('this route will be removed since 2021/5/30, please use api/v2/depth to instead.')
+
         query = {
             'market': pair.lower(),
             'asks_limit': asks,
