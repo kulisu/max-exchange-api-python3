@@ -4,7 +4,9 @@
 
 This is an UNOFFICIAL wrapper for MAX exchange [HTTP API v2](https://max.maicoin.com/documents/api) written in Python 3.6
 
-USE THIS WRAPPER AT YOUR OWN RISK, I WILL NOT CORRESPOND TO ANY LOSES
+And this wrapper does not receive active maintainance, plaese consider using [CCXT](https://github.com/TaopaiC/ccxt/blob/max-191223/python/ccxt/max.py)
+
+**USE THIS WRAPPER AT YOUR OWN RISK, I WILL NOT CORRESPOND TO ANY LOSES**
 
 ## Features
 
