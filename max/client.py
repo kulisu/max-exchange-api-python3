@@ -768,6 +768,15 @@ class Client(object):
 
         return self._send_request('private', 'POST', 'orders/multi', {}, {'market': pair.lower(), 'orders': orders})
 
+    def set_private_create_withdrawal(self, currency, amount, address):
+        form = {
+            'currency': currency.lower(),
+            'withdraw_address_uuid': address,
+            'amount': str(amount),
+        }
+
+        return self._send_request('private', 'POST', 'withdrawal', {}, form)
+    
     def set_private_deposit_address(self, currency):
         """
         https://max.maicoin.com/documents/api_list#!/private/postApiV2DepositAddresses
