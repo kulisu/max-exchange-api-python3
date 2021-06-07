@@ -19,7 +19,7 @@ And this wrapper does not receive active maintainance, plaese consider using [CC
 1. [Register an account](https://max.maicoin.com/signup?r=ecc3b0ab) with MAX exchange _(referral link)_
 2. [Generate API key and secret](https://max.maicoin.com/api_tokens), assign relevant permissions to it
 3. Clone this repository, and run `examples/all_api_endpoints.py`
-4. Write your own trading policies and get profits ! 
+4. Write your own trading strategies and get profits !
 
 ### Linux
 
@@ -116,6 +116,6 @@ If you feel this wrapper saved your times, buy me a coffee ?
 
 - BTC: 32awSDjEY8V3KYS3bazLjSsu6SB3JiQcDi
 - ETH: 0xAC2a7571EBA8986e4Ec9bA1A81Cde323c959c614
-- LTC: MJNSuSSPYQRTknAMJw2BggocaMt9Lb7xFv
+- LTC: 3CAJbZ2RbHa2xGtTD42qs3ZDFfHhMM7mF8
 - MAX: 0xAC2a7571EBA8986e4Ec9bA1A81Cde323c959c614
 - USDT: 34yVszuBhejsbSfnULK187srAhGkoeWgL6
